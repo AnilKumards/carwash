@@ -1,0 +1,14 @@
+package com.example.demo.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.model.Customer;
+
+//@EnableJpaRepositories
+@Repository
+public interface CustomerRepository extends MongoRepository<Customer,String> {
+
+	Customer findByEmail(String email);
+
+}
