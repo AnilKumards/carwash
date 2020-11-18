@@ -1,0 +1,21 @@
+ package com.example.demo.repository;
+
+import java.util.Optional;
+
+import com.example.demo.model.WashOrder;
+
+public class WashOrderRepositoryImpl implements WashOrderRepository {
+
+	@Override
+	public Optional<WashOrder> findById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public WashOrder save(WashOrder washorder) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

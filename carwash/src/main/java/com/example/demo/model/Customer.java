@@ -14,8 +14,15 @@ public class Customer {
 	
 	@Id
 	private String ID;
-	private String FirstName;//firstName
-	private String LastName;
+	//private String FirstName;//firstName
+	private String Username;
+	public String getUsername() {
+		return Username;
+	}
+	public void setUsername(String username) {
+		Username = username;
+	}
+
 	private String Email;
 	private String Password;
 	private String PhoneNumber;
@@ -34,11 +41,11 @@ public class Customer {
 	{
 		
 	}
-	public Customer(String iD, String firstName, String lastName, String email, String password, String phoneNumber) {
+	public Customer(String iD, String username, String email, String password, String phoneNumber) {
 		super();
 		ID = iD;
-		FirstName = firstName;
-		LastName = lastName;
+		//FirstName = firstName;
+		Username = username;
 		Email = email;
 		Password = password;
 		PhoneNumber = phoneNumber;
@@ -56,19 +63,6 @@ public class Customer {
 	public void setID(String iD) {
 		ID = iD;
 	}
-	public String getFirstName() {
-		return FirstName;
-	}
-	public void setFirstName(String firstName) {
-		FirstName = firstName;
-	}
-	public String getLastName() {
-		return LastName;
-	}
-	public void setLastName(String lastName) {
-		LastName = lastName;
-	}
-	
 	public String getPassword() {
 		return Password;
 	}
@@ -84,7 +78,7 @@ public class Customer {
 	
 	@Override
 	public String toString() {
-		return "Customer [ID=" + ID + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Email=" + Email
+		return "Customer [ID=" + ID + ", Username=" + Username +", Email=" + Email
 				+ ", Password=" + Password + ", PhoneNumber=" + PhoneNumber + "]";
 	}
 

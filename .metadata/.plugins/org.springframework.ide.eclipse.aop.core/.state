@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="carwash"/>
+<aop-project name="carwash-washer"/>
+<aop-project name="carwash-admin"/>
+</aop-reference-model>

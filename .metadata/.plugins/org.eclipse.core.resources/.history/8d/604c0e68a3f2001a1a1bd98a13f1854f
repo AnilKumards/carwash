@@ -1,0 +1,18 @@
+package com.example.demo.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.example.demo.model.ServicePlan;
+import com.example.demo.model.WashOrder;
+
+public interface WashOrderRepository extends MongoRepository<WashOrder, Integer> {
+	
+	Optional<WashOrder> findById(String id);
+
+	WashOrder save(WashOrder washorder);
+	
+	//Optional<WashOrder> findByWashid(Integer washid);
+
+}

@@ -1,0 +1,16 @@
+package com.example.demo.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.model.WashOrder;
+@Repository
+public interface WashOrderRepository extends MongoRepository<WashOrder, Integer> {
+	
+	//Optional<WashOrder> findById(String id);
+
+	WashOrder save(WashOrder washorder);
+	
+	//Optional<WashOrder> findByWashid(Integer washid);
+
+}

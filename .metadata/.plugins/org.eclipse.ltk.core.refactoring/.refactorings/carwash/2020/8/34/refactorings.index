@@ -1,0 +1,17 @@
+1597730482200	Delete element
+1597730490562	Delete element
+1597730500229	Delete element
+1597737495343	Delete element
+1597737509543	Rename resource 'MyUserDetailService.java'
+1597746315362	Delete element
+1597746621065	Delete element
+1597815607921	Encapsulate field 'email'
+1597815625651	Encapsulate field 'name'
+1597815631296	Encapsulate field 'phone'
+1597815639612	Encapsulate field 'productInfo'
+1597815646449	Encapsulate field 'amount'
+1597815652759	Encapsulate field 'txnId'
+1597815658639	Encapsulate field 'hash'
+1597815666797	Encapsulate field 'sUrl'
+1597815672801	Encapsulate field 'fUrl'
+1597815680567	Encapsulate field 'key'

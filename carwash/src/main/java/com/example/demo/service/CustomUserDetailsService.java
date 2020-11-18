@@ -43,12 +43,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 		return customerDal.getById(email);
 	}
 	
-	public void saveUser(Customer cust) {
-		cust.setPassword(bCryptPasswordEncoder.encode(cust.getPassword()));
+	public void saveUser(Customer customer) {
+		customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
 	//	cust.setEnabled(true);
 	    Role userRole = roleRepository.findByRole("ADMIN");
-	    cust.setRoles(new HashSet<>(Arrays.asList(userRole)));
-	    userRepository.save(cust);
+	    customer.setRoles(new HashSet<>(Arrays.asList(userRole)));
+	    userRepository.save(customer);
 	}
 	
 	@Override
