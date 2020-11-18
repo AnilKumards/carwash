@@ -1,0 +1,88 @@
+package com.example.demo.service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Customer;
+import com.example.demo.model.Role;
+import com.example.demo.registration.dal.CustomerDAL;
+import com.example.demo.repository.CustomerRepository;
+import com.example.demo.repository.RoleRepository;
+
+
+
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+
+	@Autowired
+	private CustomerRepository userRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
+	private CustomerDAL customerDal;
+	
+	@Autowired
+	private PasswordEncoder bCryptPasswordEncoder;
+	
+	public Customer findUserByEmail(String email) {
+	   // return userRepository.findByEmail(email);
+		return customerDal.getById(email);
+	}
+	
+	public void saveUser(Customer customer) {
+		customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
+	//	cust.setEnabled(true);
+	    Role userRole = roleRepository.findByRole("ADMIN");
+	    customer.setRoles(new HashSet<>(Arrays.asList(userRole)));
+	    userRepository.save(customer);
+	}
+	
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		
+		System.out.println("email in service "+email);
+
+	   // Customer customer = userRepository.findByEmail(email);
+		Customer customer=customerDal.getById(email);
+		customer.setRoles(customerDal.getRole());
+		System.out.println("customer in service "+customer);
+	    if(customer != null) {
+	        List<GrantedAuthority> authorities = getUserAuthority(customer.getRoles());
+	        return buildUserForAuthentication(customer, authorities);
+	    } else {
+	        throw new UsernameNotFoundException("username not found");
+	    }
+	}
+	
+	private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
+	    Set<GrantedAuthority> roles = new HashSet<>();
+	   /*Role roles1=new Role();
+	   roles1.setId("1123");
+	   roles1.setRole("admin");
+	   userRoles.add(roles1);*/
+	    userRoles.forEach((role) -> {
+	        roles.add(new SimpleGrantedAuthority(role.getRole()));
+	    });
+
+	    List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
+	    return grantedAuthorities;
+	}
+	
+	private UserDetails buildUserForAuthentication(Customer customer, List<GrantedAuthority> authorities) {
+	    return new org.springframework.security.core.userdetails.User(customer.getEmail(), customer.getPassword(), authorities);
+	}
+}
